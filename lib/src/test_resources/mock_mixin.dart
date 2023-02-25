@@ -4,7 +4,7 @@ class MockNullValue {
 }
 
 mixin MockMixin {
-  final Set<String> calledFunctions = {};
+  final List<String> calledFunctions = [];
   final List<dynamic> _preparedObjects = [];
   final Map<String, dynamic> receivedObjects = {};
   dynamic _lastReceivedObject;
@@ -18,6 +18,10 @@ mixin MockMixin {
   addReceivedObject(dynamic object, {required String name}) {
     receivedObjects[name] = object;
     _lastReceivedObject = object;
+  }
+
+  addCalledFunction({required String named}) {
+    calledFunctions.add(named);
   }
 
   dynamic get nextReturnedObject {
@@ -58,6 +62,8 @@ mixin MockMixin {
       return null;
     } else if (returnedObject is Error || returnedObject is Exception) {
       throw returnedObject;
+    } else if (returnedObject is dynamic Function()) {
+      return returnedObject();
     } else {
       return returnedObject;
     }
