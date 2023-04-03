@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:html/parser.dart';
+
 extension StringValidations on String {
   bool get isValidEmail {
     return RegExp(
@@ -32,5 +34,16 @@ extension StringValidations on String {
 
   String renameFileInPath(String newName) {
     return substring(0, lastIndexOf(Platform.pathSeparator) + 1) + newName;
+  }
+
+  /// Returns a version that removes any HTML tags and only keeps the text
+  String stripHtmlTags() {
+    final document = parse(this);
+    final body = document.body;
+    if (body != null) {
+      return parse(body.text).documentElement?.text ?? "";
+    } else {
+      return "";
+    }
   }
 }

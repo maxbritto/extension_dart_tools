@@ -84,4 +84,14 @@ main() {
     expect("file".renameFileInPath("newfile.txt"), "newfile.txt");
     expect("".renameFileInPath("newfile.txt"), "newfile.txt");
   });
+
+  test("stripHtmlTags", () {
+    expect("Without html".stripHtmlTags(), "Without html");
+    expect("<p>With html</p>".stripHtmlTags(), "With html");
+    expect("<p>With html</p><p>And another</p>".stripHtmlTags(),
+        "With htmlAnd another");
+    expect(
+        '<a href="https://acn.com">With html and paramters</a>'.stripHtmlTags(),
+        "With html and paramters");
+  });
 }
