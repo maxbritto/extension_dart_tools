@@ -46,4 +46,31 @@ extension StringValidations on String {
       return "";
     }
   }
+
+  String addHtmlMetaViewPortTag(String metaTag) {
+    final RegExp metaTagRegExp = RegExp(r'<meta name="viewport.*?>');
+    const metaTag =
+        '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    var toInsert = metaTag;
+    if (metaTagRegExp.hasMatch(this)) {
+      return replaceAll(metaTagRegExp, metaTag);
+    } else {
+      // Add the <head> block to the string if it is not present and the <meta> tag is not present
+      const headTag = '<head>';
+      final int headIndex = indexOf(headTag);
+      if (headIndex >= 0) {
+        final insertIndex = headIndex + headTag.length;
+        return replaceRange(insertIndex, insertIndex, toInsert);
+      } else {
+        toInsert = '<head>$toInsert</head>';
+        const bodyTag = '<body>';
+        final int bodyIndex = indexOf(bodyTag);
+        if (bodyIndex >= 0) {
+          return replaceRange(bodyIndex, bodyIndex, toInsert);
+        } else {
+          return '<!DOCTYPE html><html>$toInsert<body>$this</body></html>';
+        }
+      }
+    }
+  }
 }

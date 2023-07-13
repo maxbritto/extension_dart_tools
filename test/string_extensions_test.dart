@@ -94,4 +94,34 @@ main() {
         '<a href="https://acn.com">With html and paramters</a>'.stripHtmlTags(),
         "With html and paramters");
   });
+
+  test("addHtmlMetaViewPortTag", () {
+    expect(
+        "basic text".addHtmlMetaViewPortTag(
+            '<meta name="viewport" content="width=device-width, initial-scale=1">'),
+        '<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body></html>');
+    expect(
+        '<!DOCTYPE html><html><head></head><body>basic text</body></html>'
+            .addHtmlMetaViewPortTag(
+                '<meta name="viewport" content="width=device-width, initial-scale=1">'),
+        '<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body></html>');
+    expect(
+        '<body>basic text</body>'.addHtmlMetaViewPortTag(
+            '<meta name="viewport" content="width=device-width, initial-scale=1">'),
+        '<head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body>');
+    expect(
+        '<head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body>'
+            .addHtmlMetaViewPortTag(
+                '<meta name="viewport" content="width=device-width, initial-scale=1">'),
+        '<head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body>',
+        reason: "if already present, don't add it again");
+
+    //if different meta tag, replace it
+    expect(
+        '<head><meta name="viewport" content="width=300"></head><body>basic text</body>'
+            .addHtmlMetaViewPortTag(
+                '<meta name="viewport" content="width=device-width, initial-scale=1">'),
+        '<head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>basic text</body>',
+        reason: "replace exisitng version with new one");
+  });
 }
