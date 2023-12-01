@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 class MockNullValue {
   final bool isNUll = true;
   const MockNullValue();
@@ -68,9 +70,30 @@ mixin MockMixin {
         .toList();
   }
 
+  MethodCall? lastCallForMethod({required String named}) {
+    return methodCallList
+        .lastWhereOrNull((element) => element.methodName == named);
+  }
+
+  MethodCall? lastCall() {
+    if (methodCallList.isEmpty) {
+      return null;
+    } else {
+      return methodCallList.last;
+    }
+  }
+
   bool wasCalled({required String functionName}) {
     return calledFunctions.contains(functionName) ||
         methodCallList.any((element) => element.methodName == functionName);
+  }
+
+  bool wasCalledWithArguments(
+      {required String functionName,
+      Map<String, dynamic> arguments = const {}}) {
+    return methodCallList.any((element) =>
+        element.methodName == functionName &&
+        const MapEquality().equals(element.arguments, arguments));
   }
 
   resetAllTestValues() {
