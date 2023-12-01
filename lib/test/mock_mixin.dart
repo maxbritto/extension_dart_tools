@@ -3,7 +3,18 @@ class MockNullValue {
   const MockNullValue();
 }
 
+/// Represents a method call with its name and optional arguments
+/// arguments is a [Map] of the arguments passed to the method
+class MethodCall {
+  final String methodName;
+  final Map<String, dynamic> arguments;
+  MethodCall({required this.methodName, this.arguments = const {}});
+}
+
 mixin MockMixin {
+  /// A list of all the method calls that were made to the mock
+  /// Note: this list will be filled only if you use the method [addCall] and not if you use the method [addCalledFunction] (which only supports functions names)
+  final List<MethodCall> methodCallList = [];
   final List<String> calledFunctions = [];
   final List<dynamic> _preparedObjects = [];
   final Map<String, dynamic> receivedObjects = {};
@@ -20,6 +31,19 @@ mixin MockMixin {
     _lastReceivedObject = object;
   }
 
+  /// Adds a method call to the list of method calls
+  /// and adds the arguments to the list of received objects
+  ///
+  /// Note: this is the preferred method to use to add a method call as it also forwards the information to the other methods
+  addCall({required String named, Map<String, dynamic> arguments = const {}}) {
+    methodCallList.add(MethodCall(methodName: named, arguments: arguments));
+    addCalledFunction(named: named);
+    for (final argument in arguments.entries) {
+      addReceivedObject(argument.value, name: argument.key);
+    }
+  }
+
+  @pragma('You should use addCall instead')
   addCalledFunction({required String named}) {
     calledFunctions.add(named);
   }
@@ -36,8 +60,17 @@ mixin MockMixin {
     addNextReturnFutureObject(nextObject);
   }
 
+  /// Returns all the [MethodCall] of a specific method
+  /// each call will contain the method name and argument
+  List<MethodCall> callsForMethod({required String named}) {
+    return methodCallList
+        .where((element) => element.methodName == named)
+        .toList();
+  }
+
   bool wasCalled({required String functionName}) {
-    return calledFunctions.contains(functionName);
+    return calledFunctions.contains(functionName) ||
+        methodCallList.any((element) => element.methodName == functionName);
   }
 
   resetAllTestValues() {
