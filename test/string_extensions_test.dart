@@ -2,6 +2,14 @@ import 'package:extension_dart_tools/extension_tools.dart';
 import 'package:test/test.dart';
 
 main() {
+  test('Test valid phone number', () {
+    expect("0033612345678".isValidPhoneNumber, true);
+    expect("+33612345678".isValidPhoneNumber, true);
+    expect("0612345678".isValidPhoneNumber, true);
+    expect("06 12 34 56 78".isValidPhoneNumber, true);
+    expect("06.12.34.56.78".isValidPhoneNumber, true);
+    expect("invalid phone number".isValidPhoneNumber, false);
+  });
   test('Test valid emails', () {
     expect("will@acn.com".isValidEmail, true);
     expect("will+tag@acn.com".isValidEmail, true);

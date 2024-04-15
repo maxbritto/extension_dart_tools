@@ -3,6 +3,11 @@ import 'dart:io';
 import 'package:html/parser.dart';
 
 extension StringValidations on String {
+  bool get isValidPhoneNumber {
+    final onlyNumbers = replaceAll(RegExp(r"\s|\+|-|\.|\(|\)"), "");
+    return int.tryParse(onlyNumbers) != null;
+  }
+
   bool get isValidEmail {
     return RegExp(
             r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")

@@ -1,3 +1,9 @@
+## 1.2.0
+
+### String extensions
+
+- Added `isValidPhoneNumber` extension to `String` class. Pretty basic since it just removes all allowed special characters +, (, ), -, dots and spaces and checks if the remaining characters are only digits. 
+
 ## 1.1.0
 
 ### MockMixin
