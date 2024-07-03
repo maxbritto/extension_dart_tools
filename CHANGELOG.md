@@ -1,3 +1,9 @@
+## 1.3.0
+
+### DateTime extensions
+
+- Added `isSameDay` extension to `DateTime` class. It checks if two `DateTime` instances are in the same day, ignoring the time.
+
 ## 1.2.0
 
 ### String extensions
