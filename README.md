@@ -11,29 +11,23 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Useful functions, classes and class extensions for Dart projects
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **DateTime extensions** : Add useful functions to the `DateTime` class
+- **String extensions** : Add useful functions to the `String` class
+- **MockMixin** : A mixin to help you mock classes and functions in your tests
 
-## Getting started
+## External contributions
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+If you want to add new widgets or extensions, please keep in mind before submitting a PR :
 
-## Usage
+- Widgets and extensions must be generic enough to be usable in many projects
+- Unit tests and automated tests are mandatory. 100% coverage is required for any newly added code
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Thanks for your contributions!
 
-```dart
-const like = 'sample';
-```
+Happy Coding.
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+Maxime
