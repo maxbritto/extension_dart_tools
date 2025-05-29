@@ -28,7 +28,7 @@ mixin MockMixin {
 
   dynamic get lastReceivedObject => _lastReceivedObject;
 
-  addReceivedObject(dynamic object, {required String name}) {
+  void addReceivedObject(dynamic object, {required String name}) {
     receivedObjects[name] = object;
     _lastReceivedObject = object;
   }
@@ -37,7 +37,8 @@ mixin MockMixin {
   /// and adds the arguments to the list of received objects
   ///
   /// Note: this is the preferred method to use to add a method call as it also forwards the information to the other methods
-  addCall({required String named, Map<String, dynamic> arguments = const {}}) {
+  void addCall(
+      {required String named, Map<String, dynamic> arguments = const {}}) {
     methodCallList.add(MethodCall(methodName: named, arguments: arguments));
     addCalledFunction(named: named);
     for (final argument in arguments.entries) {
@@ -46,7 +47,7 @@ mixin MockMixin {
   }
 
   @pragma('You should use addCall instead')
-  addCalledFunction({required String named}) {
+  void addCalledFunction({required String named}) {
     calledFunctions.add(named);
   }
 
@@ -96,15 +97,16 @@ mixin MockMixin {
         const MapEquality().equals(element.arguments, arguments));
   }
 
-  resetAllTestValues() {
+  void resetAllTestValues() {
     calledFunctions.clear();
     lastReceivedObject = null;
     _preparedObjects.clear();
     receivedObjects.clear();
+    methodCallList.clear();
   }
 
   ///Receives a regular object and save it for the next function that will need to return something
-  addNextReturnFutureObject(dynamic object) {
+  void addNextReturnFutureObject(dynamic object) {
     _preparedObjects.add(object ?? const MockNullValue());
   }
 

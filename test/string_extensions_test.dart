@@ -1,7 +1,7 @@
 import 'package:extension_dart_tools/extension_tools.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   test('Test valid phone number', () {
     expect("0033612345678".isValidPhoneNumber, true);
     expect("+33612345678".isValidPhoneNumber, true);

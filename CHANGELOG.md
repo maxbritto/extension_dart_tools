@@ -1,3 +1,8 @@
+## 1.3.1
+
+- Fixed a bug in the `MockMixin` class. The `resetAllTestValues` method was not resetting the new generation method call list.
+- Fixed warnings with latest dart linter version.
+
 ## 1.3.0
 
 ### DateTime extensions

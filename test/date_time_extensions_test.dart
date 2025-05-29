@@ -1,7 +1,7 @@
 import 'package:extension_dart_tools/src/date_time_extensions.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   group("DateTime extensions", () {
     test("next day of week", () {
       var aMonday = DateTime(2022, 02, 21); //monday
