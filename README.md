@@ -18,6 +18,7 @@ Useful functions, classes and class extensions for Dart projects
 - **DateTime extensions** : Add useful functions to the `DateTime` class
 - **String extensions** : Add useful functions to the `String` class
 - **MockMixin** : A mixin to help you mock classes and functions in your tests
+- **Nullable** : A class to handle nullable values (usefull for copyWith methods to actually save null values)
 
 ## External contributions
 

@@ -1,3 +1,11 @@
+## 1.4.1
+
+- Added `Nullable` class to the exported classes.
+
+## 1.4.0
+
+- Added `Nullable` class to handle nullable values.
+
 ## 1.3.1
 
 - Fixed a bug in the `MockMixin` class. The `resetAllTestValues` method was not resetting the new generation method call list.

@@ -5,5 +5,6 @@ library extension_tools;
 
 export 'src/string_extensions.dart';
 export 'src/date_time_extensions.dart';
+export 'src/nullable.dart';
 
 export 'test/mock_mixin.dart';
